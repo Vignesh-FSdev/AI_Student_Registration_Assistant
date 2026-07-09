@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>AI Student Registration Assistant</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🎓 AI Student Registration Assistant</h1>
+       <h2 class="author">Developed by Vignesh</h2>
+        <!-- ================= Dashboard ================= -->
+
+        <div class="dashboard">
+
+            <div class="dashboard-card">
+
+                <h3>Total Students</h3>
+
+                <h2 id="totalStudents">0</h2>
+
+            </div>
+
+            <div class="dashboard-card">
+
+                <h3>Total Courses</h3>
+
+                <h2 id="totalCourses">0</h2>
+
+            </div>
+
+        </div>
+
+        <!-- ================= Student Form ================= -->
+
+        <form id="studentForm">
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Enter Student Name"
+                required>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter Student Email"
+                required>
+
+            <input
+                type="text"
+                id="course"
+                placeholder="Enter Course Name"
+                required>
+
+            <button type="submit">
+
+                Save Student
+
+            </button>
+
+        </form>
+
+        <!-- Success / Error Message -->
+
+        <div id="result"></div>
+
+        <!-- ================= Search ================= -->
+
+        <input
+            type="text"
+            id="searchStudent"
+            placeholder="🔍 Search Student..."
+            onkeyup="searchStudent()">
+
+        <!-- ================= Student List ================= -->
+
+        <h2>
+
+            Registered Students
+
+        </h2>
+
+        <div id="studentList">
+
+            <!-- Students will appear here -->
+
+        </div>
+
+        <!-- ================= AI Assistant ================= -->
+
+        <h2>
+
+            🤖 AI Assistant
+
+        </h2>
+
+        <textarea
+            id="aiQuestion"
+            rows="5"
+            placeholder="Ask anything about programming, AI, Python, Full Stack Development..."></textarea>
+
+        <button
+            id="askAiButton"
+            onclick="askAI()">
+
+            Ask AI
+
+        </button>
+
+        <br><br>
+
+        <div id="aiResponse">
+
+            AI Response will appear here...
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
