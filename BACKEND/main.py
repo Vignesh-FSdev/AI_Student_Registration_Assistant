@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-raise Exception("THIS IS MY MAIN.PY")
 from pydantic import BaseModel
 from bson import ObjectId
 from ollama import Client
