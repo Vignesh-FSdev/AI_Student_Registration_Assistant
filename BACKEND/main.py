@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from bson import ObjectId
-from ollama import Client
 
 from database import student_collection
 
@@ -13,12 +12,6 @@ from database import student_collection
 app = FastAPI()
 
 print("========== MAIN.PY STARTED ==========")
-
-# ---------------------------------------
-# Ollama Client
-# ---------------------------------------
-
-client = Client(host="http://127.0.0.1:11434")
 
 # ---------------------------------------
 # CORS
@@ -40,10 +33,6 @@ class Student(BaseModel):
     name: str
     email: str
     course: str
-
-
-class ChatRequest(BaseModel):
-    message: str
 
 
 # ---------------------------------------
@@ -137,32 +126,4 @@ def delete_student(student_id: str):
 
     return {
         "message": "Student Deleted Successfully"
-    }
-
-
-# ---------------------------------------
-# AI Chat API
-# ---------------------------------------
-
-@app.post("/ai-chat")
-def ai_chat(chat: ChatRequest):
-
-    print("\n========== AI API CALLED ==========")
-    print("User Message:", chat.message)
-
-    response = client.chat(
-        model="llama3.2:1b",
-        messages=[
-            {
-                "role": "user",
-                "content": chat.message
-            }
-        ]
-    )
-
-    print("========== AI RESPONSE ==========")
-    print(response)
-
-    return {
-        "reply": response["message"]["content"]
     }
