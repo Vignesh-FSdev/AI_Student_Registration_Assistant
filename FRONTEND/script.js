@@ -2,6 +2,13 @@ let editingStudentId = null;
 let allStudents = [];
 
 // ======================================
+// Backend URL
+// ======================================
+
+const API_URL =
+"https://ai-student-registration-assistant.onrender.com";
+
+// ======================================
 // Register / Update Student
 // ======================================
 
@@ -17,12 +24,12 @@ async function saveStudent(event) {
     const email = document.getElementById("email").value.trim();
     const course = document.getElementById("course").value.trim();
 
-    let url = "http://127.0.0.1:8000/register";
+    let url = `${API_URL}/register`;
     let method = "POST";
 
     if (editingStudentId !== null) {
 
-        url = `http://127.0.0.1:8000/students/${editingStudentId}`;
+        url = `${API_URL}/students/${editingStudentId}`;
         method = "PUT";
 
     }
@@ -79,7 +86,7 @@ async function loadStudents() {
     try {
 
         const response =
-        await fetch("http://127.0.0.1:8000/students");
+        await fetch(`${API_URL}/students`);
 
         allStudents = await response.json();
 
@@ -199,7 +206,7 @@ async function deleteStudent(id) {
 
         await fetch(
 
-            `http://127.0.0.1:8000/students/${id}`,
+            `${API_URL}/students/${id}`,
 
             {
 
@@ -280,54 +287,18 @@ function updateDashboard() {
 // AI Chat
 // ======================================
 
-async function askAI() {
+function askAI() {
 
-    const question = document.getElementById("aiQuestion").value.trim();
+    const aiResponse =
+    document.getElementById("aiResponse");
 
-    if (question === "") {
-
-        alert("Please enter a question.");
-
-        return;
-
-    }
-
-    const aiResponse = document.getElementById("aiResponse");
-
-    aiResponse.innerHTML = "🤖 AI is thinking...";
-
-    try {
-
-        const response = await fetch("http://127.0.0.1:8000/ai-chat", {
-
-            method: "POST",
-
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
-                message: question
-            })
-
-        });
-
-        console.log("Status:", response.status);
-
-        const data = await response.json();
-
-        console.log("Response:", data);
-
-        aiResponse.innerHTML = data.reply || data.error || "No Response";
-
-    }
-
-    catch (error) {
-
-        console.error("FULL ERROR:", error);
-
-        aiResponse.innerHTML = "❌ " + error.message;
-
-    }
+    aiResponse.innerHTML =
+    "🤖 AI Chat has been disabled in this deployed version.<br><br>It will return in Project 2 using the OpenAI API.";
 
 }
+
+// ======================================
+// Page Load
+// ======================================
+
+loadStudents();
